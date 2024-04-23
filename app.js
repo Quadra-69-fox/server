@@ -1,16 +1,17 @@
-const express = require("express");
-const app = require("express")();
+const express = require('express');
+const app = express()
+const port = 3000
+const router = require('./routes');
 
-const Controller = require("./controllers/userController");
-
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.post("/register", Controller.registerUser);
+app.use(router)
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
